@@ -1,0 +1,25 @@
+spring:
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: #email
+    password: #password
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+          connectiontimeout: 5000
+          timeout: 3000
+          writetimeout: 5000
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: 
+    url: jdbc:mysql://localhost:3306/flask_rest_api
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL5Dialect
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update
