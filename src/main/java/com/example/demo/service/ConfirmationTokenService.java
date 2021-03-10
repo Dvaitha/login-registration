@@ -16,15 +16,15 @@ public class ConfirmationTokenService {
 	@Autowired
 	private ConfirmationTokenRepository confirmationTokenRepository;
 
-	void saveConfirmationToken(ConfirmationToken confirmationToken) {
+	public void saveConfirmationToken(ConfirmationToken confirmationToken) {
 		confirmationTokenRepository.save(confirmationToken);
 	}
 
-	void deleteConfirmationToken(Long id) {
+	public void deleteConfirmationToken(Long id) {
 		confirmationTokenRepository.deleteById(id);
 	}
 
-	Optional<ConfirmationToken> findConfirmationTokenByToken(String token) {
+	public Optional<ConfirmationToken> findConfirmationTokenByToken(String token) {
 
 		return confirmationTokenRepository.findConfirmationTokenByConfirmationToken(token);
 	}
