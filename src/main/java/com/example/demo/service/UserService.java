@@ -29,7 +29,7 @@ public class UserService implements UserDetailsService {
 
 	@Autowired
 	private ConfirmationTokenService confirmationTokenService;
-	
+
 	@Autowired
 	private EmailSenderService emailSenderService;
 
@@ -38,6 +38,21 @@ public class UserService implements UserDetailsService {
 		final Optional<User> optionalUser = userRepository.findByEmail(email);
 		if (optionalUser.isPresent()) {
 			return optionalUser.get();
+		} else {
+			throw new UsernameNotFoundException(MessageFormat.format("User with email {0} cannot be found", email));
+		}
+	}
+
+	public String signIn(String email, String password) throws UsernameNotFoundException {
+		final Optional<User> optionalUser = userRepository.findByEmail(email);
+		if (optionalUser.isPresent()) {
+			User u = optionalUser.get();
+			if (u.getPassword().equals(password)) {
+				return u.toString();
+			} else {
+				throw new UsernameNotFoundException(
+						MessageFormat.format("Password incorrect for the email {0} ", email));
+			}
 		} else {
 			throw new UsernameNotFoundException(MessageFormat.format("User with email {0} cannot be found", email));
 		}
@@ -55,7 +70,7 @@ public class UserService implements UserDetailsService {
 		confirmationTokenService.saveConfirmationToken(confirmationToken);
 	}
 
-	void confirmUser(ConfirmationToken confirmationToken) {
+	public void confirmUser(ConfirmationToken confirmationToken) {
 		final User user = confirmationToken.getUser();
 
 		user.setEnabled(true);
@@ -65,7 +80,7 @@ public class UserService implements UserDetailsService {
 		confirmationTokenService.deleteConfirmationToken(confirmationToken.getId());
 	}
 
-	void sendConfirmationMail(String userMail, String token) {
+	public void sendConfirmationMail(String userMail, String token) {
 		final SimpleMailMessage mailMessage = new SimpleMailMessage();
 		mailMessage.setTo(userMail);
 		mailMessage.setSubject("Mail Confirmation Link!");

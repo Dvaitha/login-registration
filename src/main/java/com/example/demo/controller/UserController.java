@@ -4,6 +4,7 @@ import java.io.Console;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,6 +31,11 @@ public class UserController {
 	String signIn() {
 
 		return "sign-in";
+	}
+
+	@PostMapping("/sign-in")
+	String signIn(String email, String password) {
+		return userService.signIn(email, password);
 	}
 
 	@GetMapping("/sign-up")

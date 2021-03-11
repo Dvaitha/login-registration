@@ -30,6 +30,19 @@ public class ConfirmationToken {
 
 	private LocalDate createdDate;
 
+	public ConfirmationToken() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public ConfirmationToken(Long id, String confirmationToken, LocalDate createdDate, User user) {
+		super();
+		this.id = id;
+		this.confirmationToken = confirmationToken;
+		this.createdDate = createdDate;
+		this.user = user;
+	}
+
 	@OneToOne(targetEntity = User.class, fetch = FetchType.EAGER)
 	@JoinColumn(nullable = false, name = "user_id")
 	private User user;
