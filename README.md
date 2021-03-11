@@ -1,5 +1,7 @@
 # login-registration
-Simple Login and Registration Spring Boot Application with help of Thymeleaf Library.
+Simple Login and Registration Application with Password Encryption,user locking, Sign-up Token Generation and Email confirmation feature in spring boot using BCryptPasswordEncoder, Spring JPA, Spring Security, thymeleaf, spring mail and Mysql libraries.
+
+For Database user MySQL.
 
 
 User Sign Up Page :
